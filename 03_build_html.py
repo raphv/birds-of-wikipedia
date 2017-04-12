@@ -8,6 +8,8 @@ with open("config.json") as f:
 with open("birds.json") as f:
     birds = json.load(f)
 
+print("3. Building the HTML file")
+
 with open("template.html") as f:
     template = Template(f.read())
 

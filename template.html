@@ -4,6 +4,16 @@
         <meta charset="utf-8">
         <title>Birds of Wikipedia</title>
         <link rel="stylesheet" href="assets/style.css">
+        <style type="text/css">
+        {% for lg in config.languages %}
+        html[lang="{{lg.code}}"] .language-selector li[lang="{{lg.code}}"] {
+            font-weight: 800;
+        }
+        html[lang="{{lg.code}}"] .language-alias[lang="{{lg.code}}"] {
+            display: block;
+        }
+        {% endfor %}
+        </style>
     </head>
     <body>
         <header>
@@ -11,9 +21,9 @@
                 <ul class="language-selector">
                     {% for lg in config.languages %}
                     <li lang="{{lg.code}}">
-                        <a href="#">
-                            <span class="langmoji">{{lg.emoji}}</span>
-                            {{lg.label}}
+                        <a href="#" title="{{lg.label}}">
+                            <span class="language-emoji">{{lg.emoji}}</span>
+                            <span class="language-label">{{lg.label}}</span>
                         </a>
                     </li>
                     {% endfor %}
@@ -30,17 +40,23 @@
         <section>
             <ul class="birds">
                 {% for bird in birds %}
-                <li class="bird">
+                <li class="bird" id="{{bird.latin_name|replace(" ","_")}}">
                     <h2 class="common-name">
                         <ul class="common-name-aliases">
-                        {% for lg in config.languages %}
-                            <li class="language-alias" lang="{{lg.code}}">{{bird.common_names[lg.code]}}</li>
+                        {% for lg, label in bird.common_names.items() %}
+
+                            <li class="language-alias" lang="{{lg}}">
+                                <span>{{label}}</span>
+                                <a href="http://{{lg}}.wikipedia.org/wiki/{{bird.latin_name|replace(" ","_")}}" target="_blank" title="Wikipedia page for {{label}}">&#x1F4D6;</a>
+                            </li>
                         {% endfor %}
                         </ul>
                     </h2>
-                    <h3 class="latin-name">{{bird.latin_name}}</h3>
-                    <img src="media/{{bird.picture_files.0}}">
-                    <audio src="media/{{bird.sound_files.0}}" controls>
+                    <h3 class="latin-name">{{bird.latin_name}} ({{bird.family}})</h3>
+                    <a class="image-container" href="#{{bird.latin_name|replace(" ","_")}}">
+                        <img src="media/{{bird.picture_file}}" alt="A photo of a {{bird.common_names.en}}">
+                    </a>
+                    <audio src="media/{{bird.sound_file}}" controls loop>
                 </li>
                 {% endfor %}
             </ul>
