@@ -2,12 +2,17 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width, user-scalable=no">
         <title>Birds of Wikipedia</title>
         <link rel="stylesheet" href="assets/style.css">
         <style type="text/css">
         {% for lg in config.languages %}
-        html[lang="{{lg.code}}"] .language-selector li[lang="{{lg.code}}"] {
+        html[lang="{{lg.code}}"] .language-selector li[lang="{{lg.code}}"] span.language-label {
             font-weight: 800;
+        }
+        html[lang="{{lg.code}}"] .language-selector li[lang="{{lg.code}}"] span.language-emoji {
+            text-shadow: 0 0 10px #ffff00;
+            opacity: 1;
         }
         html[lang="{{lg.code}}"] .language-alias[lang="{{lg.code}}"] {
             display: block;
@@ -17,6 +22,13 @@
     </head>
     <body>
         <header>
+            <h1>
+                <ul class="title-aliases">
+                {% for lg in config.languages %}
+                    <li class="language-alias" lang="{{lg.code}}">{{lg.page_title}}</li>
+                {% endfor %}
+                </ul>
+            </h1>
             <nav>
                 <ul class="language-selector">
                     {% for lg in config.languages %}
@@ -29,13 +41,6 @@
                     {% endfor %}
                 </ul>
             </nav>
-            <h1>
-                <ul class="title-aliases">
-                {% for lg in config.languages %}
-                    <li class="language-alias" lang="{{lg.code}}">{{lg.page_title}}</li>
-                {% endfor %}
-                </ul>
-            </h1>
         </header>
         <section>
             <ul class="birds">
@@ -61,6 +66,9 @@
                 {% endfor %}
             </ul>
         </section>
+        <footer>
+            &#x1F426; &#x1F986; &#x1F989; &#x1F413; &#x1F54A; &#x1F427; &#x1F985;
+        </footer>
         <script src="assets/script.js"> </script>
     </body>
 </html>
