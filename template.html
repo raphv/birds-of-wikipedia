@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Birds of Wikipedia</title>
+        <link rel="stylesheet" href="assets/style.css">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul class="language-selector">
+                    {% for lg in config.languages %}
+                    <li lang="{{lg.code}}">
+                        <a href="#">
+                            <span class="langmoji">{{lg.emoji}}</span>
+                            {{lg.label}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+            <h1>
+                <ul class="title-aliases">
+                {% for lg in config.languages %}
+                    <li class="language-alias" lang="{{lg.code}}">{{lg.page_title}}</li>
+                {% endfor %}
+                </ul>
+            </h1>
+        </header>
+        <section>
+            <ul class="birds">
+                {% for bird in birds %}
+                <li class="bird">
+                    <h2 class="common-name">
+                        <ul class="common-name-aliases">
+                        {% for lg in config.languages %}
+                            <li class="language-alias" lang="{{lg.code}}">{{bird.common_names[lg.code]}}</li>
+                        {% endfor %}
+                        </ul>
+                    </h2>
+                    <h3 class="latin-name">{{bird.latin_name}}</h3>
+                    <img src="media/{{bird.picture_files.0}}">
+                    <audio src="media/{{bird.sound_files.0}}" controls>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        <script src="assets/script.js"> </script>
+    </body>
+</html>

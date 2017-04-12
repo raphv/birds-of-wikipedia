@@ -45,3 +45,15 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+#IDE
+.vscode
+
+#Output files
+output/index.html
+output/media/*.oga
+output/media/*.ogg
+output/media/*.flac
+output/media/*.jpg
+output/media/*.png
+birds.json

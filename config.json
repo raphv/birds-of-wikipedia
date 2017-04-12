@@ -1,0 +1,33 @@
+{
+    "languages": [{
+        "code": "en",
+        "label": "English",
+        "page_title": "Birds of Wikipedia",
+        "emoji": "\ud83c\uddec\ud83c\udde7"
+    }, {
+        "code": "fr",
+        "label": "Fran\u00e7ais",
+        "page_title": "Les oiseaux de Wikipédia",
+        "emoji": "\ud83c\uddeb\ud83c\uddf7"
+    }, {
+        "code": "de",
+        "label": "Deutsch",
+        "page_title": "Vögel aus Wikipedia",
+        "emoji": "\ud83c\udde9\ud83c\uddea"
+    }, {
+        "code": "it",
+        "label": "Italiano",
+        "page_title": "Uccelli di Wikipedia",
+        "emoji": "\ud83c\uddee\ud83c\uddf9"
+    }, {
+        "code": "es",
+        "label": "Español",
+        "page_title": "Aves de Wikipedia",
+        "emoji": "\ud83c\uddea\ud83c\uddf8"
+    }],
+    "files": {
+        "output_dir": "output/",
+        "copy": [],
+        "download": []
+    }
+}
