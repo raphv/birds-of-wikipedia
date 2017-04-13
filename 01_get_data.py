@@ -9,15 +9,18 @@ print("1. Retrieving data from Wikidata")
 
 firstquery = """
   PREFIX entity: <http://www.wikidata.org/entity/>
-  SELECT ?species ?taxon ?family_name ?audio ?picture
+  SELECT ?species ?taxon ?family_name ?order_name ?audio ?picture
   WHERE
   {
     ?species wdt:P105 entity:Q7432 . #Looking for species
     ?species wdt:P225 ?taxon . #Querying the Taxon (latin name) for the bird
     ?species wdt:P171* ?family . #Looking for the family-level parent taxon
     ?family wdt:P225 ?family_name .
-    ?family wdt:P105 entity:Q35409 . 
-    ?family wdt:P171* entity:Q5113 . #It has to belong to Birds
+    ?family wdt:P105 entity:Q35409 .
+    ?family wdt:P171* ?order . #Looking for the order-level parent taxon
+    ?order wdt:P225 ?order_name .
+    ?order wdt:P105 entity:Q36602 .
+    ?order wdt:P171* entity:Q5113 . #It has to belong to Birds
     ?species wdt:P51 ?audio .
 	?species wdt:P18 ?picture .
   }
@@ -35,28 +38,23 @@ for result in results["results"]["bindings"]:
     if not uri in animal_dict:
         animal_dict[uri] = {
             "uri": uri,
-            "sounds": [],
-            "pictures": [],
             "latin_name": result["taxon"]["value"],
+            "wikiref": result["taxon"]["value"].replace(" ","_"),
             "common_names": {},
-            "family": result["family_name"]["value"]
+            "family": result["family_name"]["value"],
+            "order": result["order_name"]["value"],
+            "audio": result["audio"]["value"],
+            "picture": result["picture"]["value"]
         }
-    animal = animal_dict[uri]
-    audio = result["audio"]["value"]
-    picture = result["picture"]["value"]
-    if audio not in animal["sounds"]:
-        animal["sounds"].append(audio)
-    if picture not in animal["pictures"]:
-        animal["pictures"].append(picture)
 
 uris = list(animal_dict.keys())
 print("  %d birds found, now querying labels"%len(uris))
 
-chunksize = 10
+chunksize = 20
 
 for k in range(0, len(uris), chunksize):
 
-    print("    Processing batch %d of %d"%(1+k, len(uri)//chunksize))
+    print("    Processing birds %d to %d"%(1+k,min(k+chunksize, len(uris))))
 
     sub_uris = uris[k:k+chunksize]
 
@@ -90,7 +88,7 @@ with open("birds.json","w") as f:
     json.dump(
         sorted(
             animal_dict.values(),
-            key = lambda animal: "%s %s"%(animal["family"], animal["latin_name"])
+            key = lambda animal: "%(order)s %(family)s %(latin_name)s"%animal
         ),
         f,
         indent=2

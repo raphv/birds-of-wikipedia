@@ -23,32 +23,62 @@ body {
 
 header {
     background: #e0e0ff;
-    display: inline-block;
-    width: 100%;
-    clear: both;
-    padding: 10px 0;
+    padding: 10px;
     position: fixed;
     left: 0;
     top: 0;
+    right: 0;
+    z-index: 10;
+    font-size: 20px;
 }
 
 h1 {
     font-weight: 800;
-    font-size: 20px;
-    float: left;
+}
+
+nav {
+    float: right;
     margin: 0 10px;
 }
 
-ul.language-selector {
-    float: right;
-    font-size: 16px;
-    text-align: right;
-    margin: 0 5px;
+nav a {
+    margin: 0 4px;
 }
 
-.language-selector li {
+nav a.active {
+    text-shadow: 0 0 10px #ffff00;
+}
+
+#language-selector,
+#search-bar {
+    display: none;
+    text-align: right;
+    margin: 6px;
+}
+
+span.language-label {
+    font-size: 15px;
+}
+
+#language-selector li {
     display: inline-block;
-    margin: 4px;
+    margin: 0 4px;
+}
+
+#emoji-search {
+    margin: 5px 0 0;
+}
+
+li.emoji-search-item {
+    display: inline-block;
+}
+
+#searchbox {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 16px;
+    font-family: inherit;
 }
 
 span.language-emoji {
@@ -67,12 +97,13 @@ span.language-emoji {
     }
 }
 
-ul.birds {
+#birds {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 60px 0 20px;
+    margin: 20px 0;
+    z-index: 1;
 }
 
 li.bird {
@@ -101,8 +132,19 @@ li.bird {
 
 .bird h3 {
     font-size: 14px;
-    font-style: italic;
-    margin: 5px 0;
+    margin: 2px 0 5px;
+}
+
+span.family {
+    font-size: 12px;
+}
+
+span.family::before{
+    content: "– ";
+}
+
+span.order-emoji {
+    font-size: 18px;
 }
 
 a.image-container {
@@ -115,6 +157,10 @@ a.image-container {
 .image-container img {
     max-width: 100%;
     max-height: 120%;
+}
+
+span.highlight {
+    background: #80ff80;
 }
 
 footer {

@@ -19,11 +19,21 @@
         "label": "Fran\u00e7ais",
         "page_title": "Les oiseaux de Wikipédia",
         "emoji": "\ud83c\uddeb\ud83c\uddf7"
+    },{
+        "code": "hu",
+        "label": "Magyar",
+        "page_title": "Madarak a Wikipedia",
+        "emoji": "🇭🇺"
     }, {
         "code": "it",
         "label": "Italiano",
         "page_title": "Uccelli di Wikipedia",
         "emoji": "\ud83c\uddee\ud83c\uddf9"
+    }, {
+        "code": "nl",
+        "label": "Nederlands",
+        "page_title": "Vogels van Wikipedia",
+        "emoji": "🇳🇱"
     }, {
         "code": "pl",
         "label": "Polski",
@@ -34,10 +44,24 @@
         "label": "Português",
         "page_title": "Aves de Wikipedia",
         "emoji": "\ud83c\uddf5\ud83c\uddf9"
+    }, {
+        "code": "sv",
+        "label": "Svenska",
+        "page_title": "Fåglar av Wikipedia",
+        "emoji": "🇸🇪"
     }],
     "files": {
         "output_dir": "output/",
         "copy": [],
         "download": []
+    },
+    "order_emojis": {
+        "Accipitriformes": "🦅",
+        "Anseriformes": "🦆",
+        "Charadriiformes": "🌊",
+        "Columbiformes": "🕊",
+        "Galliformes": "🦃",
+        "Passeriformes": "🎵",
+        "Strigiformes": "🦉"
     }
 }

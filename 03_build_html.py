@@ -13,5 +13,10 @@ print("3. Building the HTML file")
 with open("template.html") as f:
     template = Template(f.read())
 
+paramdict = {
+    "config": config,
+    "birds": birds
+}
+
 with open("output/index.html","w") as f:
-    f.write(template.render(config=config, birds=birds))
+    f.write(template.render(**paramdict))

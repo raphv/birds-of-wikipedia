@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width, user-scalable=no">
-        <title>Birds of Wikipedia</title>
+        <title>🐦 🦆 🦉 Birds of Wikipedia 🐓 🐧 🦅</title>
         <link rel="stylesheet" href="assets/style.css">
         <style type="text/css">
         {% for lg in config.languages %}
-        html[lang="{{lg.code}}"] .language-selector li[lang="{{lg.code}}"] span.language-label {
+        html[lang="{{lg.code}}"] li[lang="{{lg.code}}"] span.language-label {
             font-weight: 800;
         }
-        html[lang="{{lg.code}}"] .language-selector li[lang="{{lg.code}}"] span.language-emoji {
+        html[lang="{{lg.code}}"] li[lang="{{lg.code}}"] span.language-emoji {
             text-shadow: 0 0 10px #ffff00;
             opacity: 1;
         }
@@ -22,34 +22,46 @@
     </head>
     <body>
         <header>
+            <nav>
+                <a href="#" id="search-button" title="Search">🔍</a>
+                <a href="#" id="random-button" title="Random">🎲</a>
+                <a href="#" id="language-button" title="Language">🏳️</a>
+            </nav>
             <h1>
-                <ul class="title-aliases">
+                <ul id="title-aliases">
                 {% for lg in config.languages %}
                     <li class="language-alias" lang="{{lg.code}}">{{lg.page_title}}</li>
                 {% endfor %}
                 </ul>
             </h1>
-            <nav>
-                <ul class="language-selector">
-                    {% for lg in config.languages %}
-                    <li lang="{{lg.code}}">
-                        <a href="#" title="{{lg.label}}">
-                            <span class="language-emoji">{{lg.emoji}}</span>
-                            <span class="language-label">{{lg.label}}</span>
-                        </a>
+            <ul id="language-selector">
+                {% for lg in config.languages %}
+                <li lang="{{lg.code}}">
+                    <a href="#" title="{{lg.label}}">
+                        <span class="language-emoji">{{lg.emoji}}</span>
+                        <span class="language-label">{{lg.label}}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            <div id="search-bar">
+                <input type="search" name="searchbox" id="searchbox">
+                <ul id="emoji-search">
+                    {% for order, emoji in config.order_emojis.items() %}
+                    <li class="emoji-search-item">
+                        <a href="#" title="{{order}}">{{emoji}}</a>
                     </li>
                     {% endfor %}
                 </ul>
-            </nav>
+            </div>
         </header>
         <section>
-            <ul class="birds">
+            <ul id="birds">
                 {% for bird in birds %}
                 <li class="bird" id="{{bird.latin_name|replace(" ","_")}}">
                     <h2 class="common-name">
                         <ul class="common-name-aliases">
                         {% for lg, label in bird.common_names.items() %}
-
                             <li class="language-alias" lang="{{lg}}">
                                 <span>{{label}}</span>
                                 <a href="http://{{lg}}.wikipedia.org/wiki/{{bird.latin_name|replace(" ","_")}}" target="_blank" title="Wikipedia page for {{label}}">&#x1F4D6;</a>
@@ -57,7 +69,13 @@
                         {% endfor %}
                         </ul>
                     </h2>
-                    <h3 class="latin-name">{{bird.latin_name}} ({{bird.family}})</h3>
+                    <h3>
+                        <span class="latin-name">{{bird.latin_name}}</span>
+                        <span class="family">{{bird.family}}</span>
+                        <span class="order-emoji" title="{{bird.order}}">
+                            {{config.order_emojis[bird.order]}}
+                        </span>
+                    </h3>
                     <a class="image-container" href="#{{bird.latin_name|replace(" ","_")}}">
                         <img src="media/{{bird.picture_file}}" alt="A photo of a {{bird.common_names.en}}">
                     </a>
@@ -67,7 +85,7 @@
             </ul>
         </section>
         <footer>
-            &#x1F426; &#x1F986; &#x1F989; &#x1F413; &#x1F54A; &#x1F427; &#x1F985;
+            <a href="https://github.com/raphv/birds-of-wikipedia">🐦 🦆 🦉 - github.com/raphv/birds-of-wikipedia 🐓 🐧 🦅</a>
         </footer>
         <script src="assets/script.js"> </script>
     </body>
