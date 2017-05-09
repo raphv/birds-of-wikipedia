@@ -112,8 +112,6 @@ birds.forEach(function(li_bird) {
         if (audio.paused) {
             stopPlayingAll();
             audio.play();
-        } else {
-            audio.pause();
         }
         evt.preventDefault();
     });
